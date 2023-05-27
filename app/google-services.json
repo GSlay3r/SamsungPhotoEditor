@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "20264694849",
+    "project_id": "photo-editor-228fb",
+    "storage_bucket": "photo-editor-228fb.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:20264694849:android:5be4f6ce5564f99792c2c0",
+        "android_client_info": {
+          "package_name": "com.example.photoeditor"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "20264694849-094u6l18psprnm5n7itmdakc2hd0cnrm.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.photoeditor",
+            "certificate_hash": "66a859530d19388a2f6e94b4d7a3f3134e856e9f"
+          }
+        },
+        {
+          "client_id": "20264694849-hr645tdcodhpbgvkch219v3k6e50qc0f.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBcuwGfyEEfPOeoSQ6eC-qMH4Xw54TVdfE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "20264694849-hr645tdcodhpbgvkch219v3k6e50qc0f.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

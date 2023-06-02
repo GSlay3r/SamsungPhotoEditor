@@ -66,6 +66,13 @@ public class FilterViewAdapter extends RecyclerView.Adapter<FilterViewAdapter.Vi
         }
     }
 
+    /**
+     * Retrieves a Bitmap image from the assets folder.
+     *
+     * @param context  The context of the application.
+     * @param strName  The name of the asset file to retrieve.
+     * @return The Bitmap image retrieved from the asset file, or null if an error occurred.
+     */
     private Bitmap getBitmapFromAsset(Context context, String strName) {
         AssetManager assetManager = context.getAssets();
         InputStream istr;

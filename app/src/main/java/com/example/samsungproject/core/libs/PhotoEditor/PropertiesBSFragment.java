@@ -41,6 +41,10 @@ public class PropertiesBSFragment extends BottomSheetDialogFragment implements S
         return inflater.inflate(R.layout.fragment_bottom_properties_dialog, container, false);
     }
 
+    /**
+     * A fragment that displays properties for drawing, such as color, opacity, and brush size.
+     * This fragment listening changes in opacity and brush size.
+     */
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);

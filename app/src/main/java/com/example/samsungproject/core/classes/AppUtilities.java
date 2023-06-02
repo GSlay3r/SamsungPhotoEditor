@@ -12,6 +12,13 @@ import android.provider.MediaStore;
 
 public class AppUtilities {
 
+    /**
+     * Gets the file path based on the Uri.
+     *
+     * @param context Application context.
+     * @param uri Uri of the file.
+     * @return Path to file.
+     */
     @SuppressWarnings("NewApi")
     public static String getPathFromUri(Context context, Uri uri) {
         final boolean isKitKat = Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT;
@@ -68,6 +75,15 @@ public class AppUtilities {
         return null;
     }
 
+    /**
+     * Gets the data column value from the Uri using the content provider.
+     *
+     * @param context Application context.
+     * @param uri Uri file.
+     * @param selection Data selection condition.
+     * @param selectionArgs Arguments for data selection clause.
+     * @return Data column value.
+     */
     @SuppressWarnings("TryFinallyCanBeTryWithResources")
     private static String getDataColumn(Context context, Uri uri, String selection, String[] selectionArgs) {
         Cursor cursor = null;
@@ -102,6 +118,11 @@ public class AppUtilities {
         return "com.google.android.apps.photos.content".equals(uri.getAuthority());
     }
 
+    /*** Changes the color by applying a coefficient to each color channel.
+     * @param color Source color in ARGB format.
+     * @param factor Color change coefficient.
+     * @return Changed color in ARGB format.
+     */
     public static int manipulateColor(int color, float factor) {
         int a = Color.alpha(color);
         int r = Math.round(Color.red(color) * factor);

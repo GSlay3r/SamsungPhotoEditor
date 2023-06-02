@@ -24,6 +24,12 @@ public class BaseActivity extends AppCompatActivity {
     private ProgressDialog mProgressDialog;
 
 
+    /**
+     * Requests a specific permission and returns whether it has been granted.
+     *
+     * @param permission The permission to be requested.
+     * @return true if the permission is already granted, or false if the permission needs to be requested.
+     */
     public boolean requestPermission(String permission) {
         boolean isGranted = ContextCompat.checkSelfPermission(this, permission) == PackageManager.PERMISSION_GRANTED;
         if (!isGranted) {
@@ -44,6 +50,13 @@ public class BaseActivity extends AppCompatActivity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
     }
 
+    /**
+     * Callback method triggered when the result of a permission request is received.
+     *
+     * @param requestCode  The code associated with the permission request.
+     * @param permissions  The array of permissions requested.
+     * @param grantResults The array of results for each permission requested.
+     */
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);

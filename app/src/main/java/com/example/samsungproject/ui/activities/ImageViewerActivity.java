@@ -67,7 +67,6 @@ public class ImageViewerActivity extends AppCompatActivity {
         if (getIntent() != null) {
 
             getListOfImages();
-//            paths = getIntent().getStringArrayListExtra("paths");
             currentPosition = initPosition = getIntent().getIntExtra("position", 0);
 
             adapter = new ImageAdapter(this, files);
@@ -101,6 +100,10 @@ public class ImageViewerActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Retrieves the list of images from the Firebase storage.
+     * Updates the image files list and sets up the adapter for the view pager.
+     */
     private void getListOfImages() {
         StorageReference listRef = storage.getReference().child(user.getUid());
 
@@ -114,7 +117,6 @@ public class ImageViewerActivity extends AppCompatActivity {
                     viewPager.setCurrentItem(currentPosition);
                 })
                 .addOnFailureListener(e -> {
-                    // Uh-oh, an error occurred!
                 });
     }
 
@@ -125,6 +127,12 @@ public class ImageViewerActivity extends AppCompatActivity {
         return super.onCreateOptionsMenu(menu);
     }
 
+    /**
+     * Performs actions based on the selected menu item.
+     *
+     * @param item The selected menu item.
+     * @return True if the menu item is handled, false otherwise.
+     */
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
@@ -170,7 +178,6 @@ public class ImageViewerActivity extends AppCompatActivity {
                             // Handle any errors
                         });
 
-//                Uri uri = FileProvider.getUriForFile(this, this.getApplicationContext().getPackageName() + ".provider", new File(files.get(currentPosition)));
 
                 break;
 
@@ -178,6 +185,9 @@ public class ImageViewerActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    /**
+     * Deletes the current image.
+     */
     private void deleteItem() {
 
         if (files.size() > 1) {

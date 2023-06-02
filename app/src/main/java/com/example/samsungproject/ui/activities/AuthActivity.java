@@ -21,13 +21,10 @@ import java.util.List;
 
 public class AuthActivity extends AppCompatActivity {
 
-    // [START auth_fui_create_launcher]
-    // See: https://developer.android.com/training/basics/intents/result
     private final ActivityResultLauncher<Intent> signInLauncher = registerForActivityResult(
             new FirebaseAuthUIActivityResultContract(),
             result -> onSignInResult(result)
     );
-    // [END auth_fui_create_launcher]
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,8 +33,11 @@ public class AuthActivity extends AppCompatActivity {
         createSignInIntent();
     }
 
+    /**
+     * Creates a sign-in intent and launches it.
+     * Uses Google as the authentication provider.
+     */
     public void createSignInIntent() {
-        // [START auth_fui_create_intent]
         // Choose authentication providers
         List<AuthUI.IdpConfig> providers = Arrays.asList(
                 new AuthUI.IdpConfig.GoogleBuilder().build()
@@ -49,63 +49,48 @@ public class AuthActivity extends AppCompatActivity {
                 .setAvailableProviders(providers)
                 .build();
         signInLauncher.launch(signInIntent);
-        // [END auth_fui_create_intent]
     }
 
-    // [START auth_fui_result]
+    /**
+     * Handles the result of the sign-in operation.
+     *
+     * @param result The authentication result.
+     */
     private void onSignInResult(FirebaseAuthUIAuthenticationResult result) {
         IdpResponse response = result.getIdpResponse();
         if (result.getResultCode() == RESULT_OK) {
-            // Successfully signed in
             startActivityForResult(new Intent(this, MainActivity.class), REQUEST_CODE);
-            // ...
-        } else {
-            // Sign in failed. If response is null the user canceled the
-            // sign-in flow using the back button. Otherwise check
-            // response.getError().getErrorCode() and handle the error.
-            // ...
         }
     }
-    // [END auth_fui_result]
 
+    /**
+     * Signs out the current user.
+     */
     public void signOut() {
-        // [START auth_fui_signout]
         AuthUI.getInstance()
                 .signOut(this)
                 .addOnCompleteListener(task -> {
-                    // ...
                 });
-        // [END auth_fui_signout]
     }
 
+    /**
+     * Deletes the current user's account.
+     */
     public void delete() {
-        // [START auth_fui_delete]
         AuthUI.getInstance()
                 .delete(this)
                 .addOnCompleteListener(task -> {
                     // ...
                 });
-        // [END auth_fui_delete]
     }
 
-//    public void themeAndLogo() {
-//        List<AuthUI.IdpConfig> providers = Collections.emptyList();
-//
-//        // [START auth_fui_theme_logo]
-//        Intent signInIntent = AuthUI.getInstance()
-//                .createSignInIntentBuilder()
-//                .setAvailableProviders(providers)
-//                .setLogo(R.drawable.my_great_logo)      // Set logo drawable
-//                .setTheme(R.style.MySuperAppTheme)      // Set theme
-//                .build();
-//        signInLauncher.launch(signInIntent);
-//        // [END auth_fui_theme_logo]
-//    }
-
+    /**
+     * Launches the sign-in intent with privacy and terms links.
+     * Uses an empty list of providers.
+     */
     public void privacyAndTerms() {
         List<AuthUI.IdpConfig> providers = Collections.emptyList();
 
-        // [START auth_fui_pp_tos]
         Intent signInIntent = AuthUI.getInstance()
                 .createSignInIntentBuilder()
                 .setAvailableProviders(providers)
@@ -114,18 +99,19 @@ public class AuthActivity extends AppCompatActivity {
                         "https://example.com/privacy.html")
                 .build();
         signInLauncher.launch(signInIntent);
-        // [END auth_fui_pp_tos]
     }
 
+    /**
+     * Launches the sign-in intent with email link authentication.
+     */
     public void emailLink() {
-        // [START auth_fui_email_link]
         ActionCodeSettings actionCodeSettings = ActionCodeSettings.newBuilder()
                 .setAndroidPackageName(
                         /* yourPackageName= */ "...",
                         /* installIfNotAvailable= */ true,
                         /* minimumVersion= */ null)
-                .setHandleCodeInApp(true) // This must be set to true
-                .setUrl("https://google.com") // This URL needs to be whitelisted
+                .setHandleCodeInApp(true)
+                .setUrl("https://google.com")
                 .build();
 
         List<AuthUI.IdpConfig> providers = Arrays.asList(
@@ -139,13 +125,14 @@ public class AuthActivity extends AppCompatActivity {
                 .setAvailableProviders(providers)
                 .build();
         signInLauncher.launch(signInIntent);
-        // [END auth_fui_email_link]
     }
 
+    /**
+     * Catches the email link sign-in intent and launches the sign-in intent with the provided link.
+     */
     public void catchEmailLink() {
         List<AuthUI.IdpConfig> providers = Collections.emptyList();
 
-        // [START auth_fui_email_link_catch]
         if (AuthUI.canHandleIntent(getIntent())) {
             if (getIntent().getExtras() == null) {
                 return;
@@ -160,6 +147,5 @@ public class AuthActivity extends AppCompatActivity {
                 signInLauncher.launch(signInIntent);
             }
         }
-        // [END auth_fui_email_link_catch]
     }
 }

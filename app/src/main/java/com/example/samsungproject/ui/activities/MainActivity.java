@@ -48,6 +48,9 @@ public class MainActivity extends AppCompatActivity {
         requestWorkingWithAllFilesAndroidRAndHigher();
     }
 
+    /**
+     * Requests necessary permissions for the application to function properly.
+     */
     void requestPermissions() {
         ActivityCompat.requestPermissions(
                 this,
@@ -60,6 +63,10 @@ public class MainActivity extends AppCompatActivity {
         );
     }
 
+    /**
+     Requests permission to work with all files on devices running Android R and higher.
+     Opens the system settings if permission is not granted.
+     */
     void requestWorkingWithAllFilesAndroidRAndHigher() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R && !Environment.isExternalStorageManager()) {
             Intent intent = new Intent(Settings.ACTION_MANAGE_APP_ALL_FILES_ACCESS_PERMISSION);
@@ -103,6 +110,13 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
+    /**
+     * Handles the result of permission requests.
+     *
+     * @param requestCode The request code of the permission request.
+     * @param permissions The requested permissions.
+     * @param grantResults The results of the permission request.
+     */
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
@@ -162,6 +176,13 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * Handles the result of activities started for results.
+     *
+     * @param requestCode The request code of the activity result.
+     * @param resultCode The result code of the activity result.
+     * @param data The data returned by the activity result.
+     */
     @SuppressLint("MissingSuperCall")
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {

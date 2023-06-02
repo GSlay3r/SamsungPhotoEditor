@@ -4,6 +4,9 @@ import android.os.Environment;
 
 import com.example.photoeditor.R;
 
+/**
+ * The class of constant values
+ */
 final public class Constants {
 
     public final static String EMPTY = "";

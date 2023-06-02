@@ -1,6 +1,6 @@
 package com.example.samsungproject.core.libs.PhotoEditor.tools;
 
-import static com.example.photoeditor.core.classes.Constants.COLORS;
+import static com.example.samsungproject.core.classes.Constants.COLORS;
 
 import android.content.Context;
 import android.graphics.PorterDuff;

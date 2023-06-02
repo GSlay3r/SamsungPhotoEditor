@@ -152,6 +152,10 @@ public class ImageEditorActivity extends BaseActivity implements OnPhotoEditorLi
         getUriIntent();
     }
 
+
+    /**
+     * Retrieves the Uri from the intent extras and displays the image.
+     */
     private void getUriIntent() {
 
         if (getIntent() != null && getIntent().hasExtra("uriStr")) {
@@ -166,6 +170,13 @@ public class ImageEditorActivity extends BaseActivity implements OnPhotoEditorLi
 
     }
 
+
+    /**
+     * Called when the text in the EditText changes.
+     * @param rootView The root view of the activity.
+     * @param text The new text entered in the EditText.
+     * @param colorCode The color code for the text.
+     */
     @Override
     public void onEditTextChangeListener(final View rootView, String text, int colorCode) {
         TextEditorDialogFragment textEditorDialogFragment =
@@ -219,6 +230,12 @@ public class ImageEditorActivity extends BaseActivity implements OnPhotoEditorLi
         onBackPressed();
     }
 
+
+    /**
+     * Called when the Camera button is clicked.
+     * Launches the device's camera to capture an image
+     * and sets up the camera intent and specifies the output file for the captured image
+     */
     @OnClick(R.id.imgCamera)
     void onImgCameraClick() {
         boolean success = true;
@@ -263,57 +280,11 @@ public class ImageEditorActivity extends BaseActivity implements OnPhotoEditorLi
 
     }
 
+    /**
+     * Saves the edited image to Firebase storage.
+     */
     @SuppressLint("MissingPermission")
     private void saveImage() {
-//        if (requestPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
-//            showLoading();
-//
-//            boolean success = true;
-//            File storageDir = new File(FINAL_PICTURE_DIRECTORY);
-//
-//            if (!storageDir.exists()){success = storageDir.mkdirs();}
-//
-//            if (!success) return;
-//
-//            File file = new File(storageDir, System.currentTimeMillis() + ".png");
-//            try {
-//                if (!file.createNewFile()) return;
-//
-//                SaveSettings saveSettings = new SaveSettings.Builder()
-//                        .setClearViewsEnabled(true)
-//                        .setTransparencyEnabled(true)
-//                        .build();
-//
-//                mPhotoEditor.saveAsFile(file.getAbsolutePath(), saveSettings, new PhotoEditor.OnSaveListener() {
-//                    @Override
-//                    public void onSuccess(@NonNull String imagePath) {
-//
-//                        hideLoading();
-//                        showSnackbar(getString(R.string.image_saving_success));
-//                        currentImgUri = Uri.fromFile(new File(imagePath));
-//
-//                        mPhotoEditorView.getSource().setImageURI(currentImgUri);
-//
-//                        startActivity(new Intent(ImageEditorActivity.this, ImageSharingActivity.class).putExtra("path", imagePath));
-//                        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
-//                    }
-//
-//                    @Override
-//                    public void onFailure(@NonNull Exception exception) {
-//                        hideLoading();
-//                        showSnackbar(getString(R.string.image_saving_failure));
-//                    }
-//                });
-//
-//            } catch (IOException e) {
-//
-//                e.printStackTrace();
-//                hideLoading();
-//
-//                if (e.getMessage() != null) showSnackbar(e.getMessage());
-//
-//            }
-//        }
         showLoading();
 
         String fileName = System.currentTimeMillis() + ".png";
@@ -676,6 +647,11 @@ public class ImageEditorActivity extends BaseActivity implements OnPhotoEditorLi
         mPhotoEditor.setFilterEffect(photoFilter);
     }
 
+
+    /**
+     * Sets the appropriate behavior and UI for the selected tool.
+     * @param toolType The type of tool selected.
+     */
     @Override
     public void onToolSelected(ToolType toolType) {
         switch (toolType) {
@@ -711,7 +687,10 @@ public class ImageEditorActivity extends BaseActivity implements OnPhotoEditorLi
         }
     }
 
-
+    /**
+     Shows or hides the filter options UI.
+     @param isVisible True to show the filter options, false to hide them.
+     */
     void showFilter(boolean isVisible) {
         mIsFilterVisible = isVisible;
         mConstraintSet.clone(mRootView);

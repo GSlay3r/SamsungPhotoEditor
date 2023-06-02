@@ -43,6 +43,13 @@ public class ImageAdapter extends PagerAdapter {
         return view == object;
     }
 
+    /**
+     * Creates and returns a picture representation for the specified position in the slider.
+     *
+     * @param container Parent container in which the image representation will be located.
+     * @param position Position of the element in the list of images.
+     * @return The representation of the image displayed in the slider for the specified position.
+     */
     @NonNull
     @Override
     public Object instantiateItem(@NonNull ViewGroup container, int position) {

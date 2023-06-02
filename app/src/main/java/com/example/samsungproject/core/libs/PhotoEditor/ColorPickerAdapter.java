@@ -101,6 +101,11 @@ public class ColorPickerAdapter extends RecyclerView.Adapter<ColorPickerAdapter.
         void onColorPickerClickListener(int colorCode);
     }
 
+    /**
+     * Returns a list of default colors for a color picker.
+     * @param context The context used to retrieve color resources.
+     * @return A list of integer values representing the default colors.
+     */
     private static List<Integer> getDefaultColors(Context context) {
 
         ArrayList<Integer> colorPickerColors = new ArrayList<>();

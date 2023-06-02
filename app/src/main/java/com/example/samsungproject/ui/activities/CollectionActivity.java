@@ -67,6 +67,11 @@ public class CollectionActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Retrieves the list of images from Firebase Storage.
+     * Clears the files list and adds the retrieved items to it.
+     * Calls the loadItems() method to load the items in the RecyclerView.
+     */
     private void getListOfImages() {
         StorageReference listRef = storage.getReference().child(user.getUid());
 
@@ -81,22 +86,10 @@ public class CollectionActivity extends AppCompatActivity {
                 });
     }
 
-//    private void scanFolder() {
-//
-//        File directory = new File(FINAL_PICTURE_DIRECTORY);
-//        File[] files = directory.listFiles();
-//
-//        if (files == null) return;
-//
-//        paths.clear();
-//
-//        for (File file : files) {
-//            paths.add(file.getAbsolutePath());
-//        }
-//
-//        loadItems();
-//    }
-
+    /**
+     * Loads the items in the RecyclerView using the CollectionAdapter.
+     * Launches the ImageViewerActivity when an item is clicked.
+     */
     private void loadItems() {
         CollectionAdapter adapter = new CollectionAdapter(this, files, position -> {
 
